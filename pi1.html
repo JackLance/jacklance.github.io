@@ -1,0 +1,239 @@
+<!--
+
+ __          __              _             _ 
+ \ \        / /             (_)           | |
+  \ \  /\  / /_ _ _ __ _ __  _ _ __   __ _| |
+   \ \/  \/ / _` | '__| '_ \| | '_ \ / _` | |
+    \  /\  ( (_| | |  | | | | | | | | (_| |_|
+     \/  \/ \__,_|_|  |_| |_|_|_| |_|\__, (_)
+                                      __/ |  
+                                     |___/  
+
+
+Hello savvy solver!
+
+
+You don't need to look in the source for any reason.
+
+The answers to puzzles are below (in ROT13), so you can spoil yourself by scrolling downward if you want.
+Because this isn't a contest and just for personal fun, I don't bother to obfuscate or have back-end answer checking.
+
+If you're totally stuck on a puzzle, you can always email me for a hint. :)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//-->
+<html style="background-image: url('background.png'); background-repeat:no-repeat; 
+  background-size: 100% 100%;">
+  <link href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap" rel="stylesheet">
+  <head>
+      <style>
+         .row {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         flex-direction:row
+         }
+         .column {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         flex-direction:column
+         }
+         .font{
+
+         	font-family: 'Just Another Hand', cursive;
+         	font-size:30;
+         	color:#6a0000;
+         	height:auto;
+         }
+         .fonta{
+         	background-color:transparent;
+         	border-color:transparent;
+         	font-family: 'Just Another Hand', cursive;
+         	font-size:30;
+         	color:#6a0000;
+         	height:auto;
+         	width:300px;
+         	height: 45px;
+    		margin-left: 5px;
+    		text-transform:uppercase
+         }
+         .fonta:focus{
+         	outline:none;
+         }
+         #input::-webkit-input-placeholder{
+         	color: transparent;
+			  text-indent: -9999px;
+			  background-image: url('inputback.png');
+			  background-position: 0 50%;
+			  background-repeat: no-repeat; 
+
+         	
+         }
+
+         #input::-moz-placeholder {
+  /* Firefox 19+ */
+  color: transparent;
+  text-indent: -9999px;
+  background-image: url("inputback.png");
+  background-position: 0 50%;
+  background-repeat: no-repeat; 
+}
+#input:-moz-placeholder {
+  /* Firefox 18- */
+  color: transparent;
+  text-indent: -9999px;
+  background-image: url("inputback.png");
+  background-position: 0 50%;
+  background-repeat: no-repeat; 
+}
+#input:-ms-input-placeholder {
+  /* IE 10- */
+  color: transparent;
+  text-indent: -9999px;
+  background-image: url("inputback.png");
+  background-position: 0 50%;
+  background-repeat: no-repeat; 
+}
+      </style>
+   </head>
+
+   <div class="column" style="height:100%">
+   <a href="./pi.html" style="width:100%"><img src="return.png" style=""></img></a>
+
+	<div class="row">
+		<img src="firstread.png"></img>
+		<img src="here2.png" style="margin-left:10px"></img>
+	</div>
+<img src="confirmanswers.png"></img>
+<div style="width:90%; height:inherit; background-color:#ffffff80; border:3px; border-radius:20px; border-style:solid; border-color:#444444b0; font-size:30px; font-family:monospace; padding:20px">
+<div style="background: url('inputbox.png') no-repeat">
+<input id="input" type="text" placeholder="Check Answer..." onkeypress="func(event)" class="fonta">
+</div>
+<div id="result" class="font">
+asdfasdf
+</div>
+
+<div>
+	<div id="0" class="font">?</div>
+	<div id="1" class="font">?</div>
+	<div id="2" class="font">?</div>
+	<div id="3" class="font">?</div>
+	<div id="4" class="font">?</div>
+	<div id="5" class="font">?</div>
+	<div id="6" class="font">?</div>
+	<div id="7" class="font">?</div>
+
+</div>
+
+</div>
+<img src="emailme.png" style="margin-top:10px"></img>
+</div>
+
+<script>
+
+	puzzles = [
+		{ans:"APPEAR", unlocks:8},
+		{ans:"WRISTLET", unlocks:8},
+		{ans:"TRUDIE", unlocks:10},
+		{ans:"MINOTAURS", unlocks:10},
+		{ans:"JAMESBOND", unlocks:12},
+		{ans:"FRAGMENTED", unlocks:12},
+		{ans:"TIMESUP", unlocks:14},
+		{ans:"METALLURGY", unlocks:14},
+		{ans:"DISEMBODIMENT", locked:true, url:"test.html"},
+		{ans:"APPLET", unlocks:16},
+		{ans:"TIDESTAINREMOVAL", locked:true},
+		{ans:"RUMOUR", unlocks:16},
+		{ans:"INTERSECTION", locked:true},
+		{ans:"AMEND", unlocks:18},
+		{ans:"BETWEENYOUANDME", locked:true},
+		{ans:"STALL", unlocks:18},
+		{ans:"TAKEOUTFOOD", locked:true},
+		{ans:"TOUR", unlocks:20},
+		{ans:"INSIDERS", locked:true},
+		{ans:"MENTAL", unlocks:20},
+		{ans:"SODIUMBOND", locked:true},
+		{ans:"TOURNAMENTAL"}
+	]
+
+	function filter(s){
+		alph = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		t = "";
+		for(c of s){
+			for(a of alph){
+				if(c==a) t+=a;
+			}
+		}
+		return t;
+	}
+
+	function tryit(s){
+		guess = filter(s.toUpperCase());
+		ans = ""
+		for(i in puzzles){
+			if(guess == puzzles[i].ans) {
+				if(i<8){
+
+					showBeginningText = true;
+					for(j=0; j<8; j++){
+						if(puzzles[j].solved) {
+							showBeginningText = false;
+						}
+					}
+					puzzles[i].solved = true;
+					if(showBeginningText){
+						ans+= "Yup, that's correct! I'll fill that in your bracket, shown below.\nYour bracket will continue to get filled out as you solve puzzles.\nYou'll also start unlocking match-up puzzles, which are harder."
+					}else{
+						ans+= "Yup."
+					}
+
+				}
+
+				if(puzzles[i].unlocks && puzzles[puzzles[i].unlocks].locked){
+					puzzles[puzzles[i].unlocks].locked = false;
+					ans += "You unlocked a puzzle <a href = " + puzzles[puzzles[i].unlocks].url + "> named something</a>";
+				}
+				puzzles[i].solved = true;
+
+				if(document.getElementById([] + i) != null){
+					document.getElementById([] + i).innerHTML = guess;
+				}
+				
+			}
+			
+		}
+		if(ans=="") return "Nope, " + guess + " is not right.";
+		return ans;
+	}
+
+	function func(e){
+		if(e.charCode != 13) return;
+		document.getElementById('result').innerHTML = tryit(document.getElementById('input').value);
+	}
+
+</script>
+  </html>
