@@ -64,15 +64,17 @@ If you're totally stuck on a puzzle, you can always email me for a hint. :)
          }
          .font{
 
-         	font-family: 'Just Another Hand', cursive;
+         	font-family: monospace;
          	font-size:30;
          	color:#6a0000;
          	height:auto;
          }
          .fonta{
-         	background-color:transparent;
-         	border-color:transparent;
-         	font-family: 'Just Another Hand', cursive;
+         	background-color:#ffffffa0;
+         	font-family: monospace;
+         	border-radius:5px;
+         	border-style:solid;
+         	border-color:#6a0000;
          	font-size:30;
          	color:#6a0000;
          	height:auto;
@@ -81,43 +83,11 @@ If you're totally stuck on a puzzle, you can always email me for a hint. :)
     		margin-left: 5px;
     		text-transform:uppercase
          }
-         .fonta:focus{
+          .fonta:focus{
          	outline:none;
          }
-         #input::-webkit-input-placeholder{
-         	color: transparent;
-			  text-indent: -9999px;
-			  background-image: url('inputback.png');
-			  background-position: 0 50%;
-			  background-repeat: no-repeat; 
-
-         	
-         }
-
-         #input::-moz-placeholder {
-  /* Firefox 19+ */
-  color: transparent;
-  text-indent: -9999px;
-  background-image: url("inputback.png");
-  background-position: 0 50%;
-  background-repeat: no-repeat; 
-}
-#input:-moz-placeholder {
-  /* Firefox 18- */
-  color: transparent;
-  text-indent: -9999px;
-  background-image: url("inputback.png");
-  background-position: 0 50%;
-  background-repeat: no-repeat; 
-}
-#input:-ms-input-placeholder {
-  /* IE 10- */
-  color: transparent;
-  text-indent: -9999px;
-  background-image: url("inputback.png");
-  background-position: 0 50%;
-  background-repeat: no-repeat; 
-}
+            
+    
       </style>
    </head>
 
@@ -129,10 +99,12 @@ If you're totally stuck on a puzzle, you can always email me for a hint. :)
 		<img src="here2.png" style="margin-left:10px"></img>
 	</div>
 <img src="confirmanswers.png"></img>
-<div style="width:90%; height:inherit; background-color:#ffffff80; border:3px; border-radius:20px; border-style:solid; border-color:#444444b0; font-size:30px; font-family:monospace; padding:20px">
-<div style="background: url('inputbox.png') no-repeat">
+<div style="width:90%; height:inherit; background-color:#ddddddb0; border:3px; border-radius:0px; border-style:solid; border-color:#666666; font-size:30px; font-family:monospace; padding:20px; box-shadow: 2px 4px 4px 3px #222222;">
+<!-- <div style="background: url('inputbox.png') no-repeat">
 <input id="input" type="text" placeholder="Check Answer..." onkeypress="func(event)" class="fonta">
-</div>
+</div> -->
+<input id="input" type="text" placeholder="Check Answer..." onkeypress="func(event)" class="fonta">
+
 <div id="result" class="font">
 asdfasdf
 </div>
