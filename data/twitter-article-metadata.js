@@ -1,0 +1,1 @@
+window.YTD.twitter_article_metadata.part0 = [ ]
