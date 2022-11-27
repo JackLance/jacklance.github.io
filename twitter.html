@@ -24360,11 +24360,13 @@ if(highlightTweet == null){
 }
 
 console.log(highlightTweet)
-document.getElementById("overlay").onclick = ()=>{
+document.getElementById("overlay").onclick = (e)=>{
+  if(e.path[0].className != "overlay") return;
   document.getElementById("overlay").style.display = "none"
   urlParams.delete('tweet');
-    window.location.search = urlParams;
+  window.history.replaceState("object or string", "Title", urlParams);
 }
+
 tweets.forEach(tweet => {
   if(tweet.tweet.full_text[0] == '@') return;
   el = document.getElementById("tweet").cloneNode(true);
@@ -24398,14 +24400,20 @@ tweets.forEach(tweet => {
        el.innerHTML += "<br>"
     });
   }
-
+  let el3 = el;
   if(tweet.tweet.id == highlightTweet){
     el2 = el.cloneNode(true);
     document.getElementById("overlay").appendChild(el2);
   }
+  
   el.onclick=()=>{
     urlParams.set('tweet', tweet.tweet.id);
-    window.location.search = urlParams;
+    //window.location.search = urlParams;
+    document.getElementById("overlay").style.display = "inherit"
+    document.getElementById("overlay").innerHTML = "";
+    el4 = el3.cloneNode(true);
+    document.getElementById("overlay").appendChild(el4);
+    window.history.replaceState("object or string", "Title", "twitter.html?" + urlParams);
   };
 })
 
