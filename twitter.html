@@ -2,8 +2,8 @@
   background-size: 100% 100%;">
 hey here's my twitter:
 <br>
-
-<div id="asdf">
+<div style="">
+<div id="asdf" class = "asdf">
   <div class = "tweet" id = "tweet">
     <div class="toppart">
     <div class = "name">Jack Lance</div>
@@ -16,6 +16,9 @@ hey here's my twitter:
       asdf
     </div>
   </div>
+</div>
+
+<div id="overlay" class="overlay">
 </div>
 
 <video loop autoplay muted id="vid" class="vid" style = "display:none">
@@ -24348,12 +24351,27 @@ hey here's my twitter:
   }
 ]
 
+ urlParams = new URLSearchParams(window.location.search);
+ highlightTweet = urlParams.get('tweet');
+
+if(highlightTweet == null){
+  document.getElementById("overlay").style.display = "none"
+}
+
+console.log(highlightTweet)
+document.getElementById("overlay").onclick = ()=>{
+  document.getElementById("overlay").style.display = "none"
+  urlParams.delete('tweet');
+    window.location.search = urlParams;
+}
 tweets.forEach(tweet => {
   if(tweet.tweet.full_text[0] == '@') return;
   el = document.getElementById("tweet").cloneNode(true);
   el.getElementsByTagName('div')[3].innerHTML = new Date(tweet.tweet.created_at).toLocaleDateString();
   el.getElementsByTagName('div')[4].innerHTML = tweet.tweet.full_text.replace(/\n/g,"<br>");
+  
   document.getElementById("asdf").appendChild(el)
+
   if(tweet.tweet.entities.media != undefined){
     tweet.tweet.extended_entities.media.forEach(o => {
       if(o.type == "photo"){
@@ -24379,6 +24397,15 @@ tweets.forEach(tweet => {
        el.innerHTML += "<br>"
     });
   }
+
+  if(tweet.tweet.id == highlightTweet){
+    el2 = el.cloneNode(true);
+    document.getElementById("overlay").appendChild(el2);
+  }
+  el.onclick=()=>{
+    urlParams.set('tweet', tweet.tweet.id);
+    window.location.search = urlParams;
+  };
 })
 
 document.getElementById("asdf").getElementsByTagName('div')[0].style="display:none";
@@ -24426,4 +24453,19 @@ font-weight: 700
 
   
 }
+
+.asdf{
+  position: absolute
+}
+
+.overlay{
+  position: fixed;
+  z-index: 9;
+  width: 100%;
+  height: 100%;
+  padding-top: 500px;
+  background-color: #000000a0;
+}
+
+
 </style>
