@@ -24364,10 +24364,10 @@ document.getElementById("overlay").onclick = (e)=>{
   if(e.path[0].className != "overlay") return;
   document.getElementById("overlay").style.display = "none"
   urlParams.delete('tweet');
-  window.history.replaceState("object or string", "Title", urlParams);
+  window.history.replaceState("object or string", "Title", "twitter.html?" + urlParams);
 }
 
-tweets.forEach(tweet => {
+tweets.sort((a, b) => {return new Date(b.tweet.created_at) - new Date(a.tweet.created_at)}).forEach(tweet => {
   if(tweet.tweet.full_text[0] == '@') return;
   el = document.getElementById("tweet").cloneNode(true);
   el.getElementsByTagName('div')[3].innerHTML = new Date(tweet.tweet.created_at).toLocaleDateString();
