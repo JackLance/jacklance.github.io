@@ -11252,7 +11252,8 @@ if(highlightTweet == null){
 
 console.log(highlightTweet)
 document.getElementById("overlay").onclick = (e)=>{
-  if(e.path[0].className != "overlay") return;
+
+  if(e.composedPath()[0].className != "overlay") return;
   document.getElementById("overlay").style.display = "none"
   urlParams.delete('tweet');
   window.history.replaceState("object or string", "Title", "twitter.html?" + urlParams);
