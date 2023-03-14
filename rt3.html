@@ -20,6 +20,7 @@
 </body>
 <br> <br> 
 <button type = "button" onclick = "returntomap()" id="ret" style="margin:auto; display:block">Go to map</button>
+<br><br>
 <style>
 
 html{
@@ -191,8 +192,8 @@ riddles = [
 {x: 400, y: 50, name: "intro3"},
 {x: 400, y: 150, name: "intro4", },
 {x: 500, y: 100, name: "intro5", },
-{x: 400, y: -50, name: "introb1", },
-{x: 400, y: 250, name: "introb2", },
+{x: 450, y: 250, name: "introb1", },
+{x: 350, y: 250, name: "introb2", },
 
 {x: 800, y: -150, name: "keypad1", },
 {x: 900, y: -150, name: "keypad3", },
@@ -269,7 +270,7 @@ connections = [
 ["intro2", "intro4"],
 ["intro3", "intro5"], 
 ["intro4", "intro5"],
-["intro3", "introb1"], 
+["intro4", "introb1"], 
 ["intro4", "introb2"],
 
 ["intro5", "keypad1"],
@@ -444,6 +445,7 @@ function maindraw(checkfinal){
             }
             else if(riddle.unlocked) {
                 ctx.fillStyle = "#eeee11";
+                ctx.setLineDash([]);
             }
             else {
                 ctx.fillStyle = "#ee1111";
@@ -482,7 +484,8 @@ function returntomap(){
          ret.innerHTML = `Return to intermission map`
          div.innerHTML = `
         <br>&nbsp;&nbsp;&nbsp;&nbsp;It's time for intermission!
-        <br>&nbsp;&nbsp;&nbsp;&nbsp;[explanation of intermission]
+        <br>&nbsp;&nbsp;&nbsp;&nbsp;A riddle search's intermission is a little break in the action. It's usually something that's still involves a similar riddly type of thinking, or is something riddle-adjacent, but doesn't exactly have the same vibe. Sometimes it's team based challenges or progressing the plot in some way, it can be nice to have a little allotted time in the middle to do something new.
+        <br>&nbsp;&nbsp;&nbsp;&nbsp; Big riddle searches often have multiple intermissions placed throughout, and if they do, often times those intermissions form some sort of over-arching sequence.
         `
     }
     firstvisit = false;
@@ -592,8 +595,8 @@ riddles = [
 {x: 400, y: 50, name: "intro3"},
 {x: 400, y: 150, name: "intro4", },
 {x: 500, y: 100, name: "intro5", },
-{x: 400, y: -50, name: "introb1", },
-{x: 400, y: 250, name: "introb2", },
+{x: 450, y: 250, name: "introb1", },
+{x: 350, y: 250, name: "introb2", },
 
 {x: 800, y: -150, name: "keypad1", },
 {x: 900, y: -150, name: "keypad3", },
@@ -670,7 +673,7 @@ connections = [
 ["intro2", "intro4"],
 ["intro3", "intro5"], 
 ["intro4", "intro5"],
-["intro3", "introb1"], 
+["intro4", "introb1"], 
 ["intro4", "introb2"],
 
 ["intro5", "keypad1"],
@@ -849,7 +852,12 @@ window.addEventListener('resize', resize);
 f1 = (i) => {setTimeout( () => {document.getElementById('completedpng').style.opacity = i/100;}, 5*i)}
 f2 = (i) => {setTimeout( () => {document.getElementById('completedpng').style.opacity = 1-i/100;}, 1500+5*i)}
 
+currentlydoing = false;
+
 function complete(){
+    if(currentlydoing) return;
+    currentlydoing = true;
+
     riddle = current;
 
     riddlesbyname[riddle].completed = true;
@@ -869,7 +877,7 @@ function complete(){
     for(i = 0; i<100; i++){
         f2(i);
     }
-    setTimeout( () => {document.getElementById('completed').style.display = 'none';}, 2000);
+    setTimeout( () => {document.getElementById('completed').style.display = 'none'; currentlydoing = false;}, 2000);
     //returntomap();
 
     if(riddle == "nexus2" || riddle == "nexus3" || riddle == "group2" || riddle == "group5"){
@@ -1105,22 +1113,21 @@ function final2(){
 
 function final3(){
     div.innerHTML = `<br>
-    <input onchange = "if(this.value == 'turkey' || this.value == 'Turkey' || this.value == 'TURKEY'){complete()}"> </input><br>
+    <input onchange = "if(this.value == 'turkey' || this.value == 'Turkey' || this.value == 'TURKEY'){complete()}; this.value=''"> </input><br>
     `
     rad = 10;
     words = [
-     
-    {x: 60, y: 200, ans: "hippopotamus", u:"1111111111111", clue: ""}, 
-    {x: 60, y: 300, ans: "bonobo", u:"111111", clue: ""}, 
-    {x: 60, y: 400, ans: "bee", u:"111", clue: ""}, 
-    {x: 60, y: 500, ans: "chihuahua", u:"222222222", clue: ""}, 
-    {x: 60, y: 600, ans: "chinchilla", u:"2222222222", clue: ""}, 
+    {x: 60, y: 200, ans: "ass", u:"111", clue: ""}, 
+    {x: 60, y: 300, ans: "hippopotamus", u:"1111111111111", clue: ""}, 
+    {x: 60, y: 400, ans: "bonobo", u:"111111", clue: ""}, 
+    {x: 60, y: 500, ans: "bee", u:"111", clue: ""}, 
+    {x: 60, y: 600, ans: "llama", u:"33333", clue: ""}, 
     {x: 60, y: 700, ans: "eel", u:"222", clue: ""},
 
     {x: 240, y: 200, ans: "australia", u:"844444444", clue: ""}, 
     {x: 240, y: 300, ans: "austria", u:"8444444", clue: ""}, 
-    {x: 240, y: 400, ans: "united states", u:"555555 666666", clue: ""}, 
-    {x: 240, y: 500, ans: "united kingdom", u:"555555 6666666", clue: ""}, 
+    {x: 240, y: 400, ans: "fiji", u:"5555", clue: ""}, 
+    {x: 240, y: 500, ans: "togo", u:"5555", clue: ""}, 
     {x: 240, y: 600, ans: "morocco", u:"7777777", clue: ""},
     {x: 240, y: 700, ans: "greece", u:"777777", clue: ""}, 
 
@@ -1400,7 +1407,7 @@ function final3(){
 
     }
 
-    window.onmousemove = e => {
+    canvas.onmousemove = e => {
         if(mousedown){
             camera[0] += (e.offsetX - mousedown[0])/camerazoom;
             camera[1] += (e.offsetY - mousedown[1])/camerazoom;
@@ -1410,7 +1417,7 @@ function final3(){
         draw();
     }
 
-    window.onmousedown = e => {
+    canvas.onmousedown = e => {
         
         mousedown = [e.offsetX, e.offsetY];}
 
@@ -1841,7 +1848,8 @@ canvas.onmousemove = e => {
 
 function finalfinal(){
     div.innerHTML = `
-     <br><br>&nbsp;&nbsp;&nbsp;&nbsp; Hopefully you've had fun, and learned a lot about riddle searches! If you enjoyed this, make sure to check out the other searches that happen each year, 
+     <br><br>&nbsp;&nbsp;&nbsp;&nbsp; Hopefully you've had fun, and learned a lot about riddle searches! If you enjoyed this, make sure to check out the other searches that happen each year! <br><br>&nbsp;&nbsp;&nbsp;&nbsp; 
+      <b>Also, after you complete this riddle, make sure you go back and read the epilogue. The password for the epilogue is the same as the code to complete this riddle, in all lowercase.</b>  <br>
     
     
     <input id = "input" style="font-size:25px;margin:auto display:block" onchange = "check(this.value)">
@@ -1880,9 +1888,15 @@ check = (val) => {
             val2 += i;
         }
     }
-    if(!list.includes(val2) || val2.length < 5){
+    if(!list.includes(val2) ){
         col1.push(val2);
-        col2.push("-");
+        col2.push("- (non-word)");
+        draw();
+        return;
+    }
+    if(val2.length < 5){
+        col1.push(val2);
+        col2.push("- (too short)");
         draw();
         return;
     }
@@ -1891,9 +1905,13 @@ check = (val) => {
     for(i of "qwertyuiopasdfghjklzxcvbnm"){
         if(("cdelmopt").includes(i) == val2.includes(i)) z++;
     }
+    if(z == 26) {
+        complete();
+        return
+    }
     col1.push(val2);
     col2.push(z);
-    if(z == 26) complete();
+    
     draw();
 }
 canvas = document.getElementById ('gameCanvas' );
@@ -1969,7 +1987,7 @@ draw();
         ctx.fillRect(camzoom*388, camzoom*105 + camzoom*(scroll1 * 11.5)/col.length, camzoom*6, camzoom*11.5 * 11.5 * 500/col.length);
     }
     for(i = 0; i<col.length; i++){
-        if(col[i][0] == "-"){
+        if(col[i][0][0] == "-"){
             ctx.fillText("• " + col[i][0], camzoom*450, camzoom*i*500 + camzoom*375 - camzoom*scroll1)
         }else{
             ctx.drawImage(imgs[col[i][0]], camzoom*500, camzoom*i*500 + camzoom*175 - camzoom*scroll1 - camzoom * 63, 450 * camzoom, 450 * camzoom)
@@ -2081,32 +2099,17 @@ function int1(){
 
 function int2(){
     div.innerHTML = `
-     ( This riddle's text is written here just so everything fits in the venn-diagram:)
-
-
-a = works near people who are experts at concealing their true emotions
-
-b = generally stays facing one direction while working
-
-c = might fire someone
-
-d = is who you should tell when you think it's time for a raise
-
-e = works closely with heads of the company
-
-f = works near a mirror
-
-g = sometimes customers want to talk with them
-
-h = has a specific vision they're trying to make reality
-
-i = appears in the credits
-
-j = is in charge of multiple people at a time
-
-k = you might ask them to hit you
-
-l = might work closely to a colorist
+     
+     <br><br>&nbsp;&nbsp;&nbsp;&nbsp; I'll stop writing "when searched in quotes" for the rest of these riddles, but know that every time I talk about searching, I'm mean searching in quotes
+     <br><br>For this riddle find a phrase that has:
+     <br>&nbsp;&nbsp; • <b> More </b> than a million results when preceded by "blue "
+     <br>&nbsp;&nbsp;  • <b> More </b> than a million results when preceded by "red "
+     <br>&nbsp;&nbsp;  • <b> Less </b> than a million results when preceded by "green "
+     <br>&nbsp;&nbsp;  • <b> Less </b> than a million results when preceded by "yellow "
+     <br><br>
+     <input onchange = "func(this.value)">
+     <br><br>
+     <div id = "cb"> </div>
 
     `
     func = (val) => {
@@ -2172,8 +2175,8 @@ function int4(){
 
 function int5(){
     div.innerHTML = `
-     <br><br>&nbsp;&nbsp;&nbsp;&nbsp; This is the finale riddle of the sequence, which means we're going to change it up a little! Instead of using the number of search results, this riddle will use the autocomplete suggestions.
-     <br>&nbsp;&nbsp;&nbsp;&nbsp; Your goal is to find something (again, either one word or multiple words), such that if you open an Incognito or Private Browsing window and type it (without quotes) into google, or whichever search engine you are using, one of the autocomplete suggestions is what you typed followed by " food", and another one of the autocomplete suggestions is what you typed followed by " clothes" or " clothing".<br><br>
+     <br><br>&nbsp;&nbsp;&nbsp;&nbsp; This is the finale riddle of the sequence, which means we're going to change it up a little! Instead of using the number of search results, this riddle will use the autocomplete suggestions. <br><br>
+     <br>&nbsp;&nbsp;&nbsp;&nbsp; Your goal is to find something (again, either one word or multiple words), such that if you open an Incognito or Private Browsing window and type it (without quotes this time) into Google, or whichever search engine you are using, one of the autocomplete suggestions is what you typed followed by " food", and another one of the autocomplete suggestions is what you typed followed by " clothes" or " clothing".<br><br>
      <input onchange = "func(this.value)">
      <br><br>
      <div id = "cb"> </div>
@@ -2328,7 +2331,7 @@ function introb1() {
         }
     }
 
-
+    canvas.style.display = "none";
 }
 
 function introb2() {
@@ -2695,7 +2698,7 @@ function keypad2(){
 
 function keypad3(){
     div.innerHTML = `
-    
+        
         
     `
 
@@ -3386,7 +3389,7 @@ pieces[9].img.src = "jig40.png";
 function qr1 () {
     div.innerHTML = `<br><br>&nbsp;&nbsp;&nbsp;&nbsp;The rule in the introduction that you can't view the source code is one example of what's usually called a "restriction". Riddles are often about overcoming obstacles to complete objectives, so restrictions are one way of creating those obstacles. Common restrictions include "You may not use a program to complete this riddle", "You may not use any dictionary search tools (such as Onelook or Nutrimatic) to complete this riddle", and "You may not use reverse image search to complete this riddle". Restrictions are helpful to be able to make interesting riddles, as some ideas that would be fun to complete normally would be trivialized if you were allowed to write a program to complete them. Sometimes this can be overcome by, for instance, putting a watermark on an image to make it so it can't be reverse-image-searched, but it's easier and more elegant for the riddle creator to just add a restriction preventing that.
         <br><br>&nbsp;&nbsp;&nbsp;&nbsp;There will never be an obfuscated restriction. Any restriction a riddle has will always be obviously separated from the plot, and explicitly marked as a restriction. Often times, they are marked with red boxes. Other than that, there's basically no restriction on what a restriction can be, anything that makes a riddle more interesting is allowed. Some memorable restrictions from past riddles searches include "You may not type or write anything down while completing this riddle", "One team member may view document A but not document B, and the other may view document B but not document A", and "You must keep the provided electric shock device on at all times while completing this riddle"  
-        <br><br>&nbsp;&nbsp;&nbsp;&nbsp; For this sequence, the goal of each riddle is to scan a QR code, which will give a 6 digit code to enter here as confirmation you completed it. I found that apps specifically for QR scanning such as <a href = "https://apps.apple.com/us/app/qr-reader-for-iphone/id368494609">this one for iphone</a> or <a href = "https://play.google.com/store/apps/details?id=com.gamma.scan">this one for android</a> worked better than my phone's built-in qr scanning. Each of the riddles has to be printed, but for convenience I've put them all in one pdf so you don't have to print 9 separate pages. The riddles are completely independent though, you won't need any part of one while completing another.
+        <br><br>&nbsp;&nbsp;&nbsp;&nbsp; For this sequence, the goal of each riddle is to scan a QR code, which will give a 6 digit code to enter here as confirmation you completed it. I found that apps specifically for QR scanning such as <a href = "https://apps.apple.com/us/app/qr-reader-for-iphone/id368494609">this one for iphone</a> or <a href = "https://play.google.com/store/apps/details?id=com.gamma.scan">this one for android</a> worked better than my phone's built-in qr scanning. Each of the riddles has to be printed, but for convenience I've put them together in pdfs so you don't have to print 9 separate pages. The riddles are completely independent though, you won't need any part of one while completing another.
         <br><br>&nbsp;&nbsp;&nbsp;&nbsp;The following restrictions apply:
                 <div class="rule"><b> • You may only print one copy, and aren't allowed to reproduce any part of them in any way, such as making additional copies, using black & white legos (or other dark/light objects) to recreate the pattern, draw the pattern out on graph paper, or use any sort of image editor. You are allowed to use other household objects, such as a mirror or scissors, for instance. (Obviously, if you destroy or lose your original copy, then you can make another copy!)<br>
                 • You have to scan the QR code to complete each riddle, you can't just reverse the encoding.
@@ -3515,6 +3518,7 @@ function qr7 () {
 }
 function qr8 () {
     div.innerHTML = `
+     <br><br>&nbsp;&nbsp;&nbsp;&nbsp;<b> This is a bonus riddle, it is completely optional, and does not unlock anything nor count towards your overall completion </b>
         <br><br>&nbsp;&nbsp;&nbsp;&nbsp;The following restrictions still apply:
                 <div class="rule"><b> • You may only print one copy, and aren't allowed to reproduce any part of them in any way, such as making additional copies, using black & white legos (or other dark/light objects) to recreate the pattern, draw the pattern out on graph paper, or use any sort of image editor. You are allowed to use other household objects, such as a mirror or scissors, for instance. (Obviously, if you destroy or lose your original copy, then you can make another copy!)<br>
                 • You have to scan the QR code to complete each riddle, you can't just reverse the encoding.
@@ -3885,6 +3889,7 @@ check = (val) => {
         }
         else if(val.toLowerCase() == "link" || val.toLowerCase() == "hulk"){
             div.innerHTML = `
+            <br><br>&nbsp;&nbsp;&nbsp;&nbsp;You're not necessarily expected to know everything in every riddle. Unless specifically told you can't, you're allowed to look up whatever you need to in order to complete a riddle.
     <br><br>
     <b> Good guess, but not quite.</b>
     <input onchange = "check(this.value)"> </input>
@@ -3893,6 +3898,7 @@ check = (val) => {
 
         }else{
             div.innerHTML = `
+            <br><br>&nbsp;&nbsp;&nbsp;&nbsp;You're not necessarily expected to know everything in every riddle. Unless specifically told you can't, you're allowed to look up whatever you need to in order to complete a riddle.
     <br><br>
 
     <input onchange = "check(this.value)"> </input>
@@ -5410,7 +5416,7 @@ words = [
 {ang: 6.5,x: 200*Math.cos(5.4+0.45)+20, y:200*Math.sin(5.4+0.45), ans: "thunder", clue: "This is in the same list as vacuums, car rides, mailmen, and vets."},
 {ang: 7.5, x: 200*Math.cos(6.3+0.45)+20, y:200*Math.sin(6.3+0.45), ans: "grand slam", clue: "Term from bridge that is now used in baseball, tennis, racing, etc."},
 {ang: 1,x: 300*Math.cos(0.9), y:300*Math.sin(0.9), ans: "water slide", clue: "Examples are named Aqualoop, Scorpion's Tail and Poseidon's Revenge."}, 
-{ang: 2,x: 300*Math.cos(1.8), y:300*Math.sin(1.8), ans: "credit card", clue: "Object with at least twenty digits total on the front and the back."}, 
+{ang: 2,x: 300*Math.cos(1.8), y:300*Math.sin(1.8), ans: "credit card", clue: "Object with at least twenty digits total on the front and the back combined."}, 
 {ang: 3,x: 300*Math.cos(2.7), y:300*Math.sin(2.7), ans: "compliment", clue: "Something that can be given out for free, makes other people happy, and has no negative side-effects."}, 
 {ang: 4,x: 300*Math.cos(3.6), y:300*Math.sin(3.6), ans: "kool aid man", clue: "Someone who's cherry flavored."}, 
 {ang: 5,x: 300*Math.cos(4.5), y:300*Math.sin(4.5),  ans: "sand castle", clue: "Type of \"building\" that's significantly more temporary than most."}, 
@@ -5685,7 +5691,7 @@ canvas.onwheel = e => {
 
 }
 
-window.onmousemove = e => {
+canvas.onmousemove = e => {
 
     if(mousedown){
         camera[0] += (e.offsetX/camzoom - mousedown[0])/camerazoom;
@@ -5697,7 +5703,7 @@ window.onmousemove = e => {
     draw();
 }
 
-window.onmousedown = e => {
+canvas.onmousedown = e => {
     mousedown = [e.offsetX/camzoom , e.offsetY/camzoom ];}
 
 window.onmouseup = e => {
@@ -6007,7 +6013,7 @@ canvas.onwheel = e => {
 
 }
 
-window.onmousemove = e => {
+canvas.onmousemove = e => {
     if(mousedown){
         camera[0] += (e.offsetX/camzoom - mousedown[0])/camerazoom;
         camera[1] += (e.offsetY/camzoom - mousedown[1])/camerazoom;
@@ -6017,7 +6023,7 @@ window.onmousemove = e => {
     draw();
 }
 
-window.onmousedown = e => {
+canvas.onmousedown = e => {
     
     mousedown = [e.offsetX/camzoom, e.offsetY/camzoom];}
 
@@ -6339,7 +6345,7 @@ canvas.onwheel = e => {
 
 }
 
-window.onmousemove = e => {
+canvas.onmousemove = e => {
     if(mousedown){
         camera[0] += (e.offsetX/camzoom - mousedown[0])/camerazoom;
         camera[1] += (e.offsetY/camzoom - mousedown[1])/camerazoom;
@@ -6349,7 +6355,7 @@ window.onmousemove = e => {
     draw();
 }
 
-window.onmousedown = e => {
+canvas.onmousedown = e => {
     
     mousedown = [e.offsetX/camzoom, e.offsetY/camzoom];}
 
@@ -6682,7 +6688,7 @@ canvas.onwheel = e => {
 
 }
 
-window.onmousemove = e => {
+canvas.onmousemove = e => {
     if(mousedown){
         camera[0] += (e.offsetX/camzoom - mousedown[0])/camerazoom;
         camera[1] += (e.offsetY/camzoom - mousedown[1])/camerazoom;
@@ -6692,7 +6698,7 @@ window.onmousemove = e => {
     draw();
 }
 
-window.onmousedown = e => {
+canvas.onmousedown = e => {
     
     mousedown = [e.offsetX/camzoom, e.offsetY/camzoom];}
 
@@ -6732,7 +6738,7 @@ function magic () {
     <br><br>&nbsp;&nbsp;&nbsp;&nbsp; Sometimes a sequence can be compressed into a single riddle, called a singleton. When this is done, it still has the elements of a sequence: an idea is still introduced, iterated on in multiple ways, and has some finale at the end, it's just all contained within one riddle.
     <br><br>&nbsp;&nbsp;&nbsp;&nbsp; When this is done, 100% of the time, it means there will be some interaction between the parts of the sequence in some way. For example, it's possible entering in the code for one section changes another section, or that pieces can be dragged between sections, or so on. It's not that all of the pieces must interact with all of the other pieces, but there must be <i>some</i> interaction or other reason that it couldn't have been separated into different riddles. This didn't used to be a rule that was guaranteed to be true, but I'll explain how this developed as an example of how these sorts of conventions can solidify:
     <br><br>&nbsp;&nbsp;• Originally, riddle searches sometimes had sequences separated into multiple riddles, and sometimes had them compressed into a single riddle.
-    <br><br>&nbsp;&nbsp;• When a sequence is separated into multiple riddles, those riddles must be independent, riddle completers realized that when a sequence was a singleton, that might be a sign the parts wouldn't be independent.
+    <br><br>&nbsp;&nbsp;• When a sequence is separated into multiple riddles, those riddles must be independent, so riddle completers realized that when a sequence was a singleton, that might be a sign the parts wouldn't be independent.
     <br><br>&nbsp;&nbsp;• Riddle creators, knowing that riddle completers sometimes interpret singletons as a sign of interdependence, didn't want people to get stuck looking for something that wasn't there, so made sure to always separate sequences if all of the riddles within were independent.
     <br><br>&nbsp;&nbsp;• Now riddle completers, knowing that riddle creators always do this, can be certain that sequences contained within one riddle must not be entirely independent.
     <br><br>&nbsp;&nbsp;• And riddle creators, knowing that riddle completers know this, now have to continue to follow this rule.
@@ -6744,7 +6750,7 @@ function magic () {
     <iframe 
     src="https://www.youtube.com/embed/spIT4yO3hVo">
     </iframe><br>
-    <input onchange = "check(this.value)"> </input>
+    <input onchange = "check(this.value); this.value=''"> </input>
     <div id="magicnote" style="color:red"> <br><b>magic is not this riddle's code, and in fact, the correct code does not share any letters in the same positions as magic (so, the first letter of the correct code isn't m, the second letter isn't a, and so on.)</b> <div>
     `;
 
