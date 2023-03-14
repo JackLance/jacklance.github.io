@@ -1628,8 +1628,8 @@ function final4(){
         dontclear = false;
         if(!selected) return;
 
-        selected.x = Math.min(Math.max(0, e.offsetX - offset[0]), 1200-selected.img.width)
-        selected.y = Math.min(Math.max(0,e.offsetY - offset[1]), 800-selected.img.height);
+        selected.x = Math.min(Math.max(0, e.offsetX/camzoom - offset[0]), 1200-selected.img.width)
+        selected.y = Math.min(Math.max(0,e.offsetY/camzoom - offset[1]), 800-selected.img.height);
 
         draw();
     }
@@ -2195,7 +2195,7 @@ function intro0(){
     div.innerHTML = `
      <br><br><b><div style="font-size:30px">Welcome to the first Root Three Riddle Search!</div></b> <br> <br> &nbsp;&nbsp;&nbsp;&nbsp;
     If you missed the announcement, the reason this search is being held today is that rt(3) ≈ 1.73, and today is January 73rd, (counting February 1st as January 32nd, February 2nd as January 33rd, and so on.) Coincidentally, '23 is a pretty nice year for this, as the square root of three can technically be written as ²√3. Using the above logic, rt(3) Day falls on March 14th, or March 13th on leap years. Surprisingly, "thirteenth" and "fourteenth" both contain "rt", and March is month 3 of the year, so it's a very suitable time to celebrate rt(3). :) <br><br> &nbsp;&nbsp;&nbsp;&nbsp;
-        √3 is a constant generally associated with equilateral triangles, so if you want to celebrate rt(3) day, you could have some Doritos, hamentash, or a Toblerone. In fact, a lot of places, like 7-11 and Blaze, have sales on pizza for rt(3) day, because a slice of pizza can look a lot like an equilateral triangle. Alternatively, you could also celebrate with root beer, rutabega, and other root vegetables. Personally, I think it should be a national holiday, but I know that's a pretty <i> radical </i> idea (you could call me a three-thinker.) If I had wanted to use more decimal places, rt(3) ≈ 1.732051, so I would have had to wait until 1/73/2051, about thirty years from now, before running this riddle search. But I didn't want 2cos(30) years is a pretty long time.<br><br><br><br> &nbsp;&nbsp;&nbsp;&nbsp;
+        √3 is a constant generally associated with equilateral triangles, so if you want to celebrate rt(3) day, you could have some Doritos, hamentash, or a Toblerone. In fact, a lot of places, like 7-11 and Blaze, have sales on pizza for rt(3) day, because a slice of pizza can look a lot like an equilateral triangle. Alternatively, you could also celebrate with root beer, rutabaga, and other root vegetables. Personally, I think it should be a national holiday, but I know that's a pretty <i> radical </i> idea (you could call me a three-thinker.) If I had wanted to use more decimal places, rt(3) ≈ 1.732051, so I would have had to wait until 1/73/2051, about thirty years from now, before running this riddle search. But I didn't want 2cos(30) years is a pretty long time.<br><br><br><br> &nbsp;&nbsp;&nbsp;&nbsp;
         I think riddle searching can be a pretty hard hobby to get into, especially because for so many people, the first one they get exposed to is the annual Harvard Riddle Search. It can be intimidating and opaque for newer searchers, as the rules and conventions aren't documented anywhere. I decided to make this as an introduction for anyone who hasn't done a riddle search before, in order to explain what to expect from other riddle searches without assuming prior knowledge.<br><br>&nbsp;&nbsp;&nbsp;&nbsp;
         This riddle search is intended to be completed by one or two people, rather than a big team. If you work with more than one person, you'll have to sync your progress manually by sending each other codes from the map screen. The site has been checked in Chrome and Firefox, and probably won't work on mobile. Also, one rule before getting started:
             <div class="rule"><b>You are not allowed to the view the source-code for any of the riddles in this search.</b></div>
@@ -3590,7 +3590,7 @@ function qr9 () {
 function group1 () {
 div.innerHTML = `
     <br><br>&nbsp;&nbsp;&nbsp;&nbsp; It's important to remember that every riddle must have some method of interaction. There might just be a code to enter, or some buttons to press, or pieces you need to arrange correctly, there always must be something because otherwise there'd be no way for it to know whether you completed the riddle or not! 
-    <br><br>&nbsp;&nbsp;&nbsp;&nbsp; Because this is the first riddle of the sequence, and the first sequence with riddles that don't simply have codes, I'll help out with the objective, but for the rest of the sequence, you'll have to figure out the objective yourself using deduction and intuition. In this riddle, the goal is to somehow sort the list of twelve itmes into two lists of six items, on either side of the vertical line.
+    <br><br>&nbsp;&nbsp;&nbsp;&nbsp; Because this is the first riddle of the sequence, and the first sequence with riddles that don't simply have codes, I'll help out with the objective, but for the rest of the sequence, you'll have to figure out the objective yourself using deduction and intuition. In this riddle, the goal is to somehow sort the list of twelve items into two lists of six items, on either side of the vertical line.
     `
 rad = 15;
 pieces = [
@@ -5571,7 +5571,7 @@ draw = () => {
     ctx.fillRect(0,camzoom *47,camzoom *2000,camzoom *3)
 
         ctx.fillStyle = "#115511";
-            ctx.font = "bold " + 25 * camzoom  + "px monospace";
+            ctx.font = "bold " + 20 * camzoom  + "px monospace";
 
             if(selected.w) {
                 ctx.fillText(selected.w.clue, camzoom *5, camzoom *30)
@@ -5734,7 +5734,7 @@ ctx = canvas.getContext ('2d' );
 rad = 10;
 words = [
 {x: 180, y: 150, ans: "anarchy", u:"1505222", clue: "What \"A\" means, when in a circle."}, 
-{x: 240, y: 125, ans: "good", u:"1451", clue: "What \"B\" means, on a trancript."}, 
+{x: 240, y: 125, ans: "good", u:"1451", clue: "What \"B\" means, on a transcript."}, 
 {x: 300, y: 100, ans: "copyright", u:"251151128", clue: "What \"C\" means, when in a circle."}, 
 {x: 360, y: 125, ans: "democrat", u:"11143428", clue: "What \"D\" means, in US politics."}, 
 {x: 420, y: 150, ans: "ecstasy", u:"2347252", clue: "What \"E\" means, when on the street."}, 
@@ -6059,7 +6059,7 @@ window.onkeydown = e => {
 function nexus3 () {
 
     div.innerHTML = `
-<br>&nbsp;&nbsp;&nbsp;&nbsp;Another reason letter webs are liked is that they are very versatile. There are a lot of ways of manipulating the format by having specific types of connections. You could have a bunch of small entries all connected to one large entry, you could have two rows of lines, which contain the same letters but spaced differently (e.g. one row having the words "dog" and "mason" and the other having "dogma" and "son"). There are tons of possible ways of making letter webs feel like a unique type of ridle based on the words a creator picks and the way they connect the bubbles, so it can feel unique each time.
+<br>&nbsp;&nbsp;&nbsp;&nbsp;Another reason letter webs are liked is that they are very versatile. There are a lot of ways of manipulating the format by having specific types of connections. You could have a bunch of small entries all connected to one large entry, you could have two rows of lines, which contain the same letters but spaced differently (e.g. one row having the words "dog" and "mason" and the other having "dogma" and "son"). There are tons of possible ways of making letter webs feel like a unique type of riddle based on the words a creator picks and the way they connect the bubbles, so it can feel unique each time.
  <br>&nbsp;&nbsp;&nbsp;&nbsp; Riddle searches also use letter webs so often, that there are a lot of gimmicks that have been explored. Like bubbles in the riddle connecting to bubbles in a hint, or bubbles with numbers and mathematical operations inside them. If you keep doing riddle searches, you'll get used to the conventions and types of places you might expect to see a letter web pop up. <br>
 
  The following restrictions still apply: 
