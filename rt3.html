@@ -1880,7 +1880,7 @@ check = (val) => {
         list = dictionary.split("\n");
         list = list.map(a => a.toLowerCase())
     }
-    val.toLowerCase();
+    val = val.toLowerCase();
     val2 = "";
     a = [0, 0, 0, 0];
     for(i of val){
@@ -2088,7 +2088,7 @@ function int1(){
     `
     func = (val) => {
         if(val != ''){
-            document.getElementById('cb').innerHTML = '<input style="width:25px; height:25px" type = "checkbox" onclick="complete(\'int1\')"> Check this box if you\'ve confirmed \"' + val + ' dog\" has over a million results when searched in quotes, and \"' + val + ' cat\" has less than under one hundred thousand when searched in quotes.'
+            document.getElementById('cb').innerHTML = '<input style="width:25px; height:25px" type = "checkbox" onclick="complete(\'int1\')"> Check this box if you\'ve confirmed \"' + val + ' dog\" has over a million results when searched in quotes, and \"' + val + ' cat\" has less than one hundred thousand when searched in quotes.'
         }else{
             document.getElementById('cb').innerHTML = ''
         }
@@ -5000,7 +5000,7 @@ check = (val) => {
         list = list.map(a => a.toLowerCase())
         console.log(list.length);
     }
-    val.toLowerCase();
+    val = val.toLowerCase();
     val2 = "";
     a = [0, 0, 0, 0];
     for(i of val){
