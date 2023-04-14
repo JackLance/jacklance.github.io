@@ -445,7 +445,7 @@ loadlevel = (i) => {
 	<div>
 	<button class = "little ${i>0 && levels[i-1].gram?"":"greyed"}" id = "PREVIOUS" style="position: relative;top: 50%;transform: translateY(-50%);"> ← PREVIOUS </button> 
 	${levels[i].z}
-	<button class = "little ${levels[i+1].gram?"":"greyed"}" id = "ULTERIOR" style="position: relative;top: 50%;transform: translateY(-50%);"> ULTERIOR → </button>
+	<button class = "little ${levels[i].gram != "FINALLVL" && levels[i+1].gram?"":"greyed"}" id = "ULTERIOR" style="position: relative;top: 50%;transform: translateY(-50%);"> ULTERIOR → </button>
 	</div>
 	
 
@@ -486,7 +486,7 @@ loadlevel = (i) => {
 	}
 
 	document.getElementById("ULTERIOR").onclick = () => {
-		if(levels[i+1].gram)loadlevel(i+1)
+		if(levels[i].gram != "FINALLVL" && levels[i+1].gram)loadlevel(i+1)
 
 	}
 }
