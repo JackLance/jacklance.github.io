@@ -150,7 +150,7 @@ levels = [
 	{gram: "UNUPRISE", ans: "downfall"},
 	{gram: "DERNEATH", ans: "over,above,on top,on top of"},
  	{required: 3},
-	{gram: "WHTSRMVD", ans: "aeoe,vowels"},
+	{gram: "WHTSRMVD", ans: "aeoe,vowels,aieoe"},
 	{gram: "MISIGLTT", ans: "sneers"},
 	
 	{required: 5},
@@ -174,7 +174,7 @@ levels = [
 	{gram: "THAIKNEE", ans: "tiny"},
 	{gram: "PHEAUQUE", ans: "folk"},
 	{gram: "LAXNEDOE", ans: "broke,bankrupt,gluten-free"},
-	{gram: "KNOTCELL", ans: "by,bi"},
+	{gram: "KNOTCELL", ans: "by,bi,bye"},
 	{gram: "SEEOHWHY", ans: "coy"},
 	{gram: "EZPZWHAT", ans: "lemon squeasy,pumpkin peasy,pumpkin pie"},
 	{gram: "CNMNENML", ans: "clownfish"},
@@ -353,6 +353,13 @@ loadlevelmenu = () => {
 	opac = 100;
 	firstanim = -1;
 	for(i in levels){
+		if(levels[i].gram){
+			z++;
+			levels[i].z = z;
+		}
+	}
+	z = 0;
+	for(i in levels){
 				if(opac <=0) continue;
 
 		z++;
@@ -360,6 +367,7 @@ loadlevelmenu = () => {
 		if(level.gram)
 			
 			if(progress >= r && !level.unlocked){
+
 					if(firstanim == -1) firstanim = i-1;
 					level.unlocked = true;
 					let uid = "unlocked"+i
@@ -375,7 +383,7 @@ loadlevelmenu = () => {
 				s += `<button class="levelbut  ${level.completed?"comp":""}" style=${opac>0?`opacity:${opac}%`:"display:none"} onclick="${r <= progress?`loadlevel(${i})`:'' }">
 							<div class="tiny" ${r > progress?"":"style='visibility:hidden'"}>${"REQUIRES " + r + "✔"}</div>
 							<div class="medium">	${ z}  </div>
-							<div class="tiny" ${level.completed?"":"style='visibility:hidden'"}>COMPLETED</div>
+							<div class="tiny" ${level.completed?"":"style='visibility:hidden'"}>COMPLETE</div>
 
 						</button>`
 			}
@@ -432,7 +440,13 @@ loadlevel = (i) => {
 	<button class = "little topright2" id = "LEVELMAP"> LEVELMAP </button> 
 	<button class = "little topright" id = "MAINMENU"> MAINMENU </button> <br>
 	<div> ${levels[i].gram} </div>
-	<input id = "input"> </input>
+	<input id = "input"> </input><br>
+	<div>
+	<button class = "little ${i>0 && levels[i-1].gram?"":"greyed"}" id = "PREVIOUS" style="position: relative;top: 50%;transform: translateY(-50%);"> ← PREVIOUS </button> 
+	${levels[i].z}
+	<button class = "little ${levels[i+1].gram?"":"greyed"}" id = "ULTERIOR" style="position: relative;top: 50%;transform: translateY(-50%);"> ULTERIOR → </button>
+	</div>
+	
 
 	`
 	document.getElementById("input").focus();
@@ -462,6 +476,16 @@ loadlevel = (i) => {
 
 	document.getElementById("MAINMENU").onclick = () => {
 		loadmainmenu()
+
+	}
+
+	document.getElementById("PREVIOUS").onclick = () => {
+		if(i>0 && levels[i-1].gram)loadlevel(i-1)
+
+	}
+
+	document.getElementById("ULTERIOR").onclick = () => {
+		if(levels[i+1].gram)loadlevel(i+1)
 
 	}
 }
