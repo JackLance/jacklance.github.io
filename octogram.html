@@ -176,7 +176,7 @@ levels = [
 	{gram: "LAXNEDOE", ans: "broke,bankrupt,gluten-free"},
 	{gram: "KNOTCELL", ans: "by,bi,bye"},
 	{gram: "SEEOHWHY", ans: "coy"},
-	{gram: "EZPZWHAT", ans: "lemon squeasy,pumpkin peasy,pumpkin pie"},
+	{gram: "EZPZWHAT", ans: "lemon squeezy,lemon squeasy,pumpkin peasy,pumpkin pie"},
 	{gram: "CNMNENML", ans: "clownfish"},
 	 {required: 16},
 	{gram: "CIRCLEDC", ans: "copyright"},
@@ -329,7 +329,14 @@ save= ()=>{
 
 load = () => {
 	if(!localStorage.getItem('savedata')) return false;
-	[progress, levels] = JSON.parse(localStorage.getItem('savedata'));
+	temp = JSON.parse(localStorage.getItem('savedata'));
+	for(i in temp[1]){
+		if(levels[i].gram) {
+			temp[1][i].gram = levels[i].gram
+			temp[1][i].ans = levels[i].ans;
+		}
+	}
+		[progress, levels] = temp;
 	console.log()
 }
 
