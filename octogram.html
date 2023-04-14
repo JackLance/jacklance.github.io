@@ -1,0 +1,545 @@
+<!doctype html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body >
+<div class = "game" id="game">
+	
+	
+</div>
+</body>
+
+<style>
+
+	
+	body{
+		background-color: #aaccaa;
+	}
+
+	body, button, input{
+		font-family: "Fira Mono Bold", monospace;
+		font-size: 100px;
+		color: #113311;
+	}
+
+	body input{
+		margin-top: 10px;
+		margin-left: auto;
+		margin-right: auto;
+		display: block;
+		text-align: center;
+		border-width: 10px;
+		background-color: #77aa77;
+		border-radius: 10px;
+		border: 10px solid #113311;
+		width: 500px;
+	}
+
+	body button.menubut{
+		margin-top: 10px;
+		margin-left: auto;
+		margin-right: auto;
+		display: block;
+		text-align: center;
+		
+	}
+
+	.greyed{
+		background-color: #99cc99;
+		border: 10px solid #557755;
+		color: #557755;
+	}
+
+	.comp{
+		background-color: #cccc77;
+		border: 10px solid #555511;
+		color: #555511;
+	}
+
+	body button.levelbut{
+		margin-top: 10px;
+		margin-left: 10px;
+		height: 150px;
+		width:150px;
+		
+	}
+
+	body button.little{
+		margin-top: 200px;
+		font-size: 30px;
+		border-width: 3px;
+	}
+
+	p{
+		margin-top:0px;
+		margin-bottom:0px;
+	}
+
+	.tiny{
+		font-size: 16px;
+
+	}
+
+	.somewhattiny{
+		font-size: 25px;
+
+	}
+
+	.medium{
+		font-size: 60px;
+	}
+
+	.levelrow{
+		white-space:nowrap;
+	}
+
+	body button {
+		border-width: 10px;
+		background-color: #77aa77;
+		border-radius: 10px;
+		border: 10px solid #113311;
+	}
+
+	body div{
+		margin-left: auto;
+		margin-right: auto;
+		display: block;
+		text-align: center;
+	}
+
+	body button.topright{
+		margin-top: 0px;
+		font-size: 30px;
+		position:absolute;
+		top:10px;
+		right:10px;
+	}
+
+	body button.topright2{
+		margin-top: 0px;
+		font-size: 30px;
+		position:absolute;
+		top:10px;
+		right:210px;
+	}
+
+	body div.little{
+		font-size: 30px;
+		position:absolute;
+		top:10px;
+		left:10px;
+	}
+
+	textarea:focus, input:focus{
+    outline: none;
+}
+
+	</style>
+<script>
+
+levels = [
+	{gram: "TYPEOKAY", ans: "okay", unlocked:true},
+  {required: 1},
+	{gram: "UNCLOSED", ans: "open,opened"},
+	{gram: "UNUNTRUE", ans: "true"},
+	{gram: "UNUNLEFT", ans: "wrong"},
+	{gram: "UNUNITED", ans: "divided,separated"},
+	{gram: "UNUPRISE", ans: "downfall"},
+	{gram: "DERNEATH", ans: "over,above,on top,on top of"},
+ 	{required: 3},
+	{gram: "WHTSRMVD", ans: "aeoe,vowels"},
+	{gram: "MISIGLTT", ans: "sneers"},
+	
+	{required: 5},
+	{gram: "FIFTYONE", ans: "51"},
+	{gram: "SIXCUBED", ans: "216"},
+	{gram: "MCMXCVII", ans: "1997"},
+	{gram: "VIIXMMVI", ans: "14042"},
+	{gram: "COVERPIR", ans: "2"},
+	{gram: "LOGROOTE", ans: "1/2"},
+	{gram: "DDXXSINX", ans: "sinx+xcosx,xcosx+sinx,sin(x)+xcos(x),xcos(x)+sin(x),sinx + xcosx,xcosx + sinx,sin(x) + xcos(x),xcos(x) + sin(x),sinx+x*cosx,x*cosx+sinx,sin(x)+x*cos(x),x*cos(x)+sin(x),sinx + x*cosx,x*cosx + sinx,sin(x) + x*cos(x),x*cos(x) + sin(x)"},
+	{required: 8},
+
+	{gram: "THEIOFIQ", ans: "intelligence"},
+	{gram: "BOFSCUBA", ans: "breathing"},
+	{gram: "GOFGINAC", ans: "ginac"},
+	{gram: "AOFLGBTQ", ans: "ace,asexual,ally,aro,aromantic"},
+	{gram: "SOFEOFIE", ans: "standard"},
+	{gram: "COFCORFU", ans: "ionian"},
+	{gram: "OOFCORFU", ans: "omicron"},
+	{required: 12},
+	{gram: "THAIKNEE", ans: "tiny"},
+	{gram: "PHEAUQUE", ans: "folk"},
+	{gram: "LAXNEDOE", ans: "broke,bankrupt,gluten-free"},
+	{gram: "KNOTCELL", ans: "by,bi"},
+	{gram: "SEEOHWHY", ans: "coy"},
+	{gram: "EZPZWHAT", ans: "lemon squeasy,pumpkin peasy,pumpkin pie"},
+	{gram: "CNMNENML", ans: "clownfish"},
+	 {required: 16},
+	{gram: "CIRCLEDC", ans: "copyright"},
+	{gram: "CIRCLEDA", ans: "anarchy"},
+	{gram: "CIRCLEDK", ans: "kosher"},
+	{gram: "CIRCLEDO", ans: "target,eye"},
+	{gram: "CIRCLEDD", ans: "odd"},
+
+  {required: 20},
+	{gram: "SUBANKLE", ans: "foot"},
+	{gram: "SMALLIFY", ans: "shrink,decrease,reduce"},
+	{gram: "PANPHAGE", ans: "omnivore"},
+	{gram: "PILOTOMY", ans: "haircut"},
+	{gram: "BIHEMITY", ans: "unity"},
+	{gram: "CONBLEMS", ans: "solutions,answers"},
+ 	{required: 23},
+	{gram: "HGXXXCBA", ans: "fed"},
+	{gram: "XXXGIKMO", ans: "ace"},
+	{gram: "MVEMJXXX", ans: "sun"},
+	{gram: "XXXIDGAD", ans: "fmd"},
+	{gram: "DECIPXXX", ans: "her"},
+	{gram: "TXIXNXLX", ans: "rage"},
+	{gram: "EXPXNXEX", ans: "add,ess"},
+  {required: 27},
+	{gram: "KCKSQCQH", ans: "two pair"},
+ 
+  {required: 30},
+	{gram: "FRTOENJE", ans: "i"},
+	{gram: "ENTOZHIN", ans: "在"},
+	{gram: "MIIDIOMA", ans: "spanish,español"},
+	{gram: "VESTENDO", ans: "italian dressing"},
+  {required: 33},
+	{gram: "PARKPARK", ans: "double park"},
+	{gram: "JUMPITIT", ans: "jump to it"},
+	{gram: "BBHONEST", ans: "to be honest"},
+	{gram: "CCCCABLE", ans: "foreseeable"},
+	{gram: "NRNRNRNR", ans: "foreigner,foreigners"},
+	{gram: "EEEEEEEE", ans: "eighty,eighties"},
+	{gram: "LARCOINS", ans: "half dollar coins"},
+	{required: 38},
+	{gram: "EEFGGFED", ans: "ode to joy"},
+	{gram: "GFLATAKA", ans: "f sharp"},
+  {required: 45},
+	{gram: "REENIGNE", ans: "reverse engineer"},
+	{gram: "NEPAINCK", ans: "pain in the neck"},
+	{gram: "AAEGIMRR", ans: "arranged marriage"},
+	{gram: "THESUMME", ans: "the endless summer"},
+	{required: 51},
+	{gram: "REDXBLUE", ans: "purple"},
+	{gram: "GOATXEWE", ans: "geep,shoat"},
+	{gram: "HPXDRACO", ans: "drarry"},
+	{gram: "BOXXXMAS", ans: "present"},
+	{gram: "CYAGENTA", ans: "blue"},
+	{gram: "TEQAHLUA", ans: "brave bull"},
+	{gram: "LUNKFAST", ans: "brunch"},
+	{required: 57},
+	{gram: "NWOFQKEY", ans: "a,1,!,!key,1key,akey"},
+	{gram: "QZASXYHN", ans: "hi"},
+	{required: 60},
+
+	{gram: "WTFISBBQ", ans: "barbecue"},
+	{gram: "NHLSGOAT", ans: "gretzky,wayne,wayne gretzky"},
+	{gram: "WWIIUSVP", ans: "garner,johngarner,johnnancegarner,john,henry,henrywallace,wallace,henryawallace,henryagardwallace"},
+	{gram: "MFWQQIRL", ans: "cry,crying"},
+	{gram: "LBKGETAL", ans: "units,weight,units of weight"},
+	{gram: "ACGASRNA", ans: "t,thr,threonine"},
+	{gram: "VVVVVVDR", ans: "violet"},
+	{gram: "ATMWOCPU", ans: "bank,teller"},
+	{required: 65},
+	{gram: "RFGFBOAF", ans: "yellow"},
+	
+	{required: 67},
+	{gram: "READYAIM", ans: "fire"},
+	{gram: "HOOKLINE", ans: "sinker"},
+	{gram: "DUCKDUCK", ans: "goose"},
+	{gram: "JOMEGAMY", ans: "beth"},
+	{gram: "LLORPORD", ans: "pots"},
+	{gram: "USECYCLE", ans: "duce"},
+	{gram: "BLEDRITE", ans: "whoo,woo,who"},
+	{gram: "OWOTHREE", ans: "net"},
+	{gram: "OLIDLIGA", ans: "squids"},
+	{gram: "LDWEATAS", ans: "booster"},
+
+	{required: 71},
+	{gram: "LLDDRRUL", ans: "g"},
+	
+  
+  
+  
+  {required: 74},
+	{gram: "SKYLIGHT", ans: "sun,star"},
+	{gram: "EARPIECE", ans: "lobe,eardrum,ear canal, ear drum, inner ear,cochlea,pinna,incus,fossa,helix,antihelix,skin"},
+	{gram: "ENDOWING", ans: "repay,payback,pay back"},
+	{gram: "NOTARIES", ans: "libra"},
+	{gram: "MANDATED", ans: "boyfriend"},
+  
+  
+  {required: 78},
+	{gram: "MURTWICE", ans: "murmur"},
+	{gram: "SPINMONS", ans: "snow"},
+	{gram: "SHIFTADS", ans: "bet"},
+	{gram: "AAFTERER", ans: "era"},
+	{gram: "MANDATED", ans: "mated"},
+	{required: 82},
+	{gram: "DRAWKCAB", ans: "backward"},
+	{gram: "ANAGREMS", ans: "managers"},
+  
+
+
+  
+  
+	{required: 86},
+	{gram: "ACDFHIJK", ans: "beg"},
+	{gram: "UWNPHJCE", ans: "void"},
+	{gram: "ABEHMQVZ", ans: "acceded"},
+	{required: 90},
+
+	{gram: "CHHHCOOH", ans: "acetic acid"},
+	{gram: "HIJKLMNO", ans: "water,h2o"},
+	{gram: "YWUSQOMK", ans: "y2k,2000"},
+	{required: 92},
+
+	{gram: "ARMYENDY", ans: "handy"},
+	{gram: "BOOYKIID", ans: "soon"},
+	{gram: "SNOTSHOT", ans: "scold"},
+	{gram: "PUGCULUR", ans: "punk"},
+	{gram: "BOVEHREE", ans: "our"},
+	{gram: "SGODTEEF", ans: "swap"},
+	{gram: "NTMLTPLS", ans: "dvd,dvds"},
+	{required: 97},
+	{gram: "FEAROFTV", ans: "televisiophobia"},
+	{gram: "FISHOFHI", ans: "humuhumunukunukuapua'a,humuhumunukunukuapuaa"},
+	{gram: "ALLOFTCP", ans: "transmission control protocol"},
+	{gram: "BEEMOVIE", ans: "//todo//"},
+	{required: 100},
+  {gram: "DEVSNAME", ans: "jack,jacklance,jack lance,zach"},
+	{gram: "LEVELONE", ans: "typeokay"},
+	{gram: "GAMESURL", ans: "jacklance.github.io/octogram,http://jacklance.github.io/octogram,jacklance.github.io/octogram.html,http://jacklance.github.io/octogram.html"},
+	{gram: "FINALLVL", ans: "finallvl"},
+	];
+cellsize = 10;
+
+curlevel = levels[0]
+progress = 0;
+
+save= ()=>{
+	localStorage.setItem('savedata', [JSON.stringify([progress, levels])])
+}
+
+load = () => {
+	if(!localStorage.getItem('savedata')) return false;
+	[progress, levels] = JSON.parse(localStorage.getItem('savedata'));
+	console.log()
+}
+
+load();
+
+onlylowercase = (s) => {
+	t = "";
+
+}
+
+hackthing = (x, y) => {
+							a = () => {
+								document.getElementById(x).style.visibility =y;
+							};
+							return a;
+						}
+
+loadlevelmenu = () => {
+	s = `<div class = "little">PROGRESS: ${progress}✔</div><button class = "little topright" id = "MAINMENU"> MAINMENU </button> <div class="levelrow">`;
+	z = 0;
+	r = 0;
+	opac = 100;
+	firstanim = -1;
+	for(i in levels){
+				if(opac <=0) continue;
+
+		z++;
+		level = levels[i];
+		if(level.gram)
+			
+			if(progress >= r && !level.unlocked){
+					if(firstanim == -1) firstanim = i-1;
+					level.unlocked = true;
+					let uid = "unlocked"+i
+					s += `<button class="levelbut ${level.completed?"comp":""}" style=${opac>0?`opacity:${opac}%`:"display:none"} onclick="${r <= progress?`loadlevel(${i})`:'' }">
+							<div class="somewhattiny" id=${uid}>UNLOCKED! </div>
+							<div class="medium">	${ z}  </div>
+							<div class="tiny" ${level.completed?"":"style='visibility:hidden'"}>COMPLETED</div>
+
+						</button>`
+						setTimeout(hackthing(uid, "hidden"), 1)
+						setTimeout(hackthing(uid, ""), 100*(i-firstanim))
+			}else{
+				s += `<button class="levelbut  ${level.completed?"comp":""}" style=${opac>0?`opacity:${opac}%`:"display:none"} onclick="${r <= progress?`loadlevel(${i})`:'' }">
+							<div class="tiny" ${r > progress?"":"style='visibility:hidden'"}>${"REQUIRES " + r + "✔"}</div>
+							<div class="medium">	${ z}  </div>
+							<div class="tiny" ${level.completed?"":"style='visibility:hidden'"}>COMPLETED</div>
+
+						</button>`
+			}
+		else{
+			z--;
+			if(level.required){
+				r = level.required;
+				if(progress < r){
+					opac -= 32;
+				}
+			}
+			s += `</div><div class="levelrow">`
+		}
+	}
+	s += `</div>`
+	document.getElementById("game").innerHTML = s;
+	document.getElementById("MAINMENU").onclick = () => {
+		loadmainmenu(0)
+
+	}
+}
+
+loadending = () => {
+	document.getElementById("game").innerHTML = `
+	<div class = "little">PROGRESS: ${progress}✔</div>
+	<button class = "little topright2" id = "LEVELMAP"> LEVELMAP </button> 
+	<button class = "little topright" id = "MAINMENU"> MAINMENU </button> <br>
+	<div> GAMEBEAT </div>
+	<div> YOUDIDIT </div>
+	<div> GREATJOB </div>
+	<div> THANKYOU </div>
+
+	`
+
+	document.getElementById("LEVELMAP").onclick = () => {
+		loadlevelmenu()
+
+	}
+
+	document.getElementById("MAINMENU").onclick = () => {
+		loadmainmenu()
+
+	}
+}
+
+
+loadlevel = (i) => {
+	if(!levels[i].gram){
+		loadlevelmenu();
+		return;
+	}
+	document.getElementById("game").innerHTML = `
+	<div class = "little">PROGRESS: ${progress}✔</div>
+	<button class = "little topright2" id = "LEVELMAP"> LEVELMAP </button> 
+	<button class = "little topright" id = "MAINMENU"> MAINMENU </button> <br>
+	<div> ${levels[i].gram} </div>
+	<input id = "input"> </input>
+
+	`
+	document.getElementById("input").focus();
+	document.getElementById("input").onchange = (e) => {
+		if(levels[i].ans.split(',').includes(e.target.value.toLowerCase()) || (levels[i].grams == "BEEMOVIE" && e.target.value.toLowerCase().includes("it one of your special skills"))){
+			bootout = false;
+			if(!levels[i].completed){
+				progress++;
+
+				for(level of levels){
+					if(level.required == progress) bootout = true;
+				}
+			}
+			levels[i].completed = true;
+			save();
+			if(levels[i].gram == "FINALLVL") loadending();
+			loadlevel(i+1);
+		}else{
+			e.target.value = "";
+		}
+	}
+
+	document.getElementById("LEVELMAP").onclick = () => {
+		loadlevelmenu()
+
+	}
+
+	document.getElementById("MAINMENU").onclick = () => {
+		loadmainmenu()
+
+	}
+}
+
+loadsettings = () => {
+	document.getElementById("game").innerHTML = `
+	<div> PROGRESS: ${progress}✔ </div>
+	<button class = "menubut"id="CLEARALL"> CLEARALL </button>
+	<button class = "menubut"id="MAINMENU"> MAINMENU </button>
+	`
+
+	document.getElementById("CLEARALL").onclick = () => {
+		progress = 0;
+		for(level of levels){
+			if(level.gram){
+				level.completed = false;
+				level.unlocked = false;
+			}
+		}
+		levels[0].unlocked = true;
+		loadsettings();
+	}
+
+	document.getElementById("MAINMENU").onclick = () => {
+		loadmainmenu(0)
+
+	}
+}
+
+loadcredits = () => {
+	document.getElementById("game").innerHTML = `
+	<div> <b> CREDITTO</b></div>
+	<div> GAMEJACK </div>
+	<div> IDEAJACK </div>
+	<div> TESTDEUS </div>
+	<div> HELPDEUS </div>
+	<button id="MAINMENU"> MAINMENU </button>
+	`
+
+	document.getElementById("MAINMENU").onclick = () => {
+		loadmainmenu(0)
+
+	}
+}
+
+loadmainmenu = () => {
+	document.getElementById("game").innerHTML = `
+	<div> OCTOGRAM </div>
+	<button class = "menubut" id = "PLAYGAME"> PLAYGAME</button>
+	<button class = "menubut ${progress == 0?"greyed":""}" id = "CONTINUE"> CONTINUE</button>
+	<button class = "menubut" id = "SETTINGS"> SETTINGS</button>
+	<button class = "menubut" id = "MOREINFO"> MOREINFO</button>
+	`
+
+	document.getElementById("PLAYGAME").onclick = () => {
+		loadlevelmenu(0)
+
+	}
+
+	document.getElementById("CONTINUE").onclick = () => {
+		if(progress > 0) loadlevelmenu(0)
+
+	}
+
+document.getElementById("SETTINGS").onclick = () => {
+		loadsettings()
+
+	}
+
+	document.getElementById("MOREINFO").onclick = () => {
+		loadcredits(0)
+
+	}
+}
+
+loadmainmenu();
+
+
+
+</script>
+</html>
