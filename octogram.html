@@ -204,7 +204,7 @@ levels = [
 	{gram: "TXIXNXLX", ans: "rage"},
 	{gram: "EXPXNXEX", ans: "add,ess"},
   {required: 27},
-	{gram: "KCKSQCQH", ans: "two pair"},
+	{gram: "KCKSQCQH", ans: "two pair,two pairs"},
  
   {required: 30},
 	{gram: "FRTOENJE", ans: "i"},
@@ -462,7 +462,7 @@ loadlevel = (i) => {
 	`
 	document.getElementById("input").focus();
 	document.getElementById("input").onchange = (e) => {
-		if(levels[i].ans.split(',').includes(e.target.value.toLowerCase()) || (levels[i].grams == "BEEMOVIE" && e.target.value.toLowerCase().includes("it one of your special skills"))){
+		if(levels[i].ans.split(',').includes(e.target.value.toLowerCase()) || (levels[i].gram=="DDXXSINX" &&  e.target.value.toLowerCase().includes("+") && e.target.value.toLowerCase().includes("sin") &&  e.target.value.toLowerCase().includes("cos")) || (levels[i].gram == "BEEMOVIE" && e.target.value.toLowerCase().includes("it one of your special skills"))){
 			bootout = false;
 			if(!levels[i].completed){
 				progress++;
