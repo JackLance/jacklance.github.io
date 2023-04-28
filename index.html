@@ -2,7 +2,7 @@
   background-size: 100% 100%;">
 <div style="display: flex;
   justify-content: center;
-  align-items: center;"><img src="hi.png"></img></div>
+  align-items: center;"><img id="hi" src="hi.png"></img></div>
 <br>
 <div style="display: flex;
   justify-content: space-around;
@@ -13,4 +13,9 @@
 <a href="./games.html"><img src="mygames.png" style=""></img></a>
 </div>
 </div>
+
+<script>
+  if(new Date() - new Date('4/30/2023') > 0) document.getElementById('hi').src = "hiwas.png";
+</script>
+
 </html>
